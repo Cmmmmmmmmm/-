@@ -1,0 +1,27 @@
+import numpy as np
+import matplotlib.pyplot as plt
+#数据集（第一列为肿瘤大小，第二列为时间)
+row_data_X =np.array([[3.3935, 2.3312],
+              [3.1101, 1.7815],
+              [1.3438, 3.3684],
+              [3.5823, 4.6792],
+              [2.2804, 2.8670],
+              [7.4234, 4.6965],
+              [5.7451, 3.5340],
+              [9.1722, 2.5111],
+              [7.7928, 3.4241],
+              [7.9398, 0.7916]])
+# 0：良性肿瘤，1：恶性肿瘤
+row_data_y = np.array([0, 0, 0, 0, 0, 1, 1, 1, 1, 1])
+plt.figure()
+plt.scatter(row_data_X[row_data_y==0,0],row_data_X[row_data_y==0,1],color='red',marker='*')
+plt.scatter(row_data_X[row_data_y==1,0],row_data_X[row_data_y==1,1],color='g',marker='x')
+#plt.show()
+#带预测数据
+x=np.array([6.5233,2.6954]).reshape(1,-1)
+from sklearn.neighbors import KNeighborsClassifier
+knn=KNeighborsClassifier(n_neighbors=3)
+knn.fit(row_data_X,row_data_y)
+predict=knn.predict(x)
+#输出预测结果
+print(predict)
